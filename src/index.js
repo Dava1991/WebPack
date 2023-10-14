@@ -43,50 +43,69 @@ import './styles/style.css'
 // 4)ДОДАЙ ДОДАТКОВИЙ ФУНКЦІОНАЛ, ЩОБ ПРИ ОНОВЛЕННІ СТОРІНКИ СПИСОК НЕ ВИДАЛЯВСЯ
 // 5)СТВОРЮЄМО КНОПОЧКУ, ПРИ ЯКОМУ БУДЕ ОЧИЩАВСЯ ЛОКАЛ СТОРЕДЖ
 
-const form = document.querySelector("#form");
-const input = document.querySelector("#input");
-const list = document.querySelector(".js-list");
+// const form = document.querySelector("#form");
+// const input = document.querySelector("#input");
+// const list = document.querySelector(".js-list");
 
-form.addEventListener("submit", inputValue);
+// form.addEventListener("submit", inputValue);
 
-function inputValue(evt) {
-    evt.preventDefault();
+// function inputValue(evt) {
+ //   evt.preventDefault();
 
-    let value = input.value;
-    const liElem = document.createElement("li");
+//    let value = input.value;
+ //   const liElem = document.createElement("li");
 
-    liElem.textContent = value;
-    list.appendChild(liElem);
+ //   liElem.textContent = value;
+ //   list.appendChild(liElem);
 
-    const localStorageParsed = JSON.parse(localStorage.getItem(liElem)) || [];
-    localStorageParsed.push(value);  
-    updateLocalStorage(localStorageParsed);
+//    const localStorageParsed = JSON.parse(localStorage.getItem(liElem)) || [];
+ //   localStorageParsed.push(value);  
+  //  updateLocalStorage(localStorageParsed);
     
-    input.value = "";
-}
+ //   input.value = "";
+//}
 
-function updateLocalStorage(liElem) {
-    localStorage.setItem("liElem", JSON.stringify(liElem));
+// function updateLocalStorage(liElem) {
+ //   localStorage.setItem("liElem", JSON.stringify(liElem));
 
-}
+// }
 
-function savedValue() {
-    const savedItems = localStorage.getItem ("liElem");
-    if (savedItems) {
-        const newParsed = JSON.parse(savedItems);
-        for(const element of newParsed) {
-            const liElem = document.createElement("li");
-            liElem.textContent = element;
-            list.appendChild(liElem);
-        }
-    }
-}
 
-savedValue();
+// function savedValue() {
+   // const savedItems = localStorage.getItem ("liElem");
+   // if (savedItems) {
+   //     const newParsed = JSON.parse(savedItems);
+   //     for(const element of newParsed) {
+   //         const liElem = document.createElement("li");
+    //        liElem.textContent = element;
+    //        list.appendChild(liElem);
+   //     }
+   // }
+//}
 
-clearBtn.addEventListener("cl,ick", storageClear);
+// savedValue();
 
-function storageClear() {
-    localStorage.removeItem("liElem");
-    list.innerHTML = "";
-}
+// clearBtn.addEventListener("cl,ick", storageClear);
+
+// function storageClear() {
+//    localStorage.removeItem("liElem");
+//    list.innerHTML = "";
+//} 
+
+//-------------------
+
+import baseUp from "./template/base.hbs";
+import { base, list, frameworks } from "./data/hbsData.js";
+import listUp from "./template/list.hbs";
+import frameworksUp from "./template/frameworks.hbs";
+import libsUp from "./template/libs.hbs";
+const markup = baseUp(base);
+const markupList = listUp(list);
+const frameworksEl = frameworksUp(frameworks);
+const libsEl = libsUp(libs);
+console.log(markup);
+const root = document.querySelector("#root");
+root.insertAdjacentHTML("beforeend", markup);
+root.insertAdjacentHTML("beforeend", markupList);
+root.insertAdjacentHTML("beforeend", frameworksEl);
+root.insertAdjacentHTML("beforeend", libsEl);
